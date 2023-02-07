@@ -159,6 +159,7 @@ contract OpenAllowlistRaffleBase is Ownable, Pausable, VRFConsumerBaseV2 {
     /**
      * @notice Set seed for drawing winners
      * @dev Must set the deterministic draw script before to ensure fairness
+     * @param raffleId The id of the raffle to draw
      */
     function draw(uint256 raffleId) public onlyOwner {
         if (raffles[raffleId].drawn) revert AlreadyDrawn();

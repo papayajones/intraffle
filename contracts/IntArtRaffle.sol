@@ -22,6 +22,7 @@ contract IntArtRaffle is OpenAllowlistRaffleBase {
     /**
      * @notice Purchase entries into the raffle with $INT
      * @param amount Amount of entries to purchase
+     * @param raffleId The id fo the raffle to enter
      */
     function enterWithInt(uint256 amount, uint256 raffleId) public whenNotPaused {
         uint256 cost = raffles[raffleId].cost;
