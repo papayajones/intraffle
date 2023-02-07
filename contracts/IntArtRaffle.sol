@@ -14,15 +14,9 @@ contract IntArtRaffle is OpenAllowlistRaffleBase {
     IInt public immutable INT_TOKEN;
     address private sinkAddress;
 
-    constructor(
-        address intAddy,
-        address vrfCoordinator
-    )
-        OpenAllowlistRaffleBase(
-            vrfCoordinator
-        )
-    {
+    constructor(address intAddy, address vrfCoordinator) OpenAllowlistRaffleBase(vrfCoordinator) {
         INT_TOKEN = IInt(intAddy);
+        sinkAddress = address(0);
     }
 
     /**
@@ -31,15 +25,9 @@ contract IntArtRaffle is OpenAllowlistRaffleBase {
      */
     function enterWithInt(uint256 amount, uint256 raffleId) public whenNotPaused {
         uint256 cost = raffles[raffleId].cost;
-        INT_TOKEN.transferFrom(_msgSender(), address(0), amount * cost);
+        INT_TOKEN.transferFrom(_msgSender(), sinkAddress, amount * cost);
         OpenAllowlistRaffleBase.enter(amount, raffleId);
     }
-
-    // /**
-    //  * @inheritdoc OpenAllowlistRaffleBase
-    //  * @dev Disable entering with parent contract's enter function
-    //  */
-    // function enter(uint256 amount, uint256 raffleId) public override payable { revert(); }
 
     function setSinkAddress(address sink) external onlyOwner {
         sinkAddress = sink;

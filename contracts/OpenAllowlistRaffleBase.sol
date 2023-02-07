@@ -105,11 +105,7 @@ contract OpenAllowlistRaffleBase is Ownable, Pausable, VRFConsumerBaseV2 {
 
     VRFCoordinatorV2Interface internal immutable COORDINATOR;
 
-    constructor(
-        address vrfCoordinator
-    )
-        VRFConsumerBaseV2(vrfCoordinator)
-    {
+    constructor(address vrfCoordinator) VRFConsumerBaseV2(vrfCoordinator) {
         COORDINATOR = VRFCoordinatorV2Interface(vrfCoordinator);
     }
 
